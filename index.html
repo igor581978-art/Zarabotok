@@ -1,15 +1,7 @@
 <!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Запуск панелі...</title>
-</head>
-<body style="background: #ffffff; margin: 0;" onclick="openAll()">
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center;">
-        <h2 style="font-family: sans-serif; color: #333;">Натисніть тут для запуску (10 вкладок)</h2>
-        <p style="font-family: sans-serif; color: #888;">Якщо не відкрилися — перевірте дозвіл на "Pop-ups" у рядку адреси</p>
-    </div>
-
+<html>
+<head><meta charset="UTF-8"></head>
+<body onclick="run()">
     <script>
         const urls = [
             'https://betfury.ai/boxes/all',
@@ -24,19 +16,16 @@
             'https://app.hyperliquid.xyz/trade/TRX'
         ];
 
-        function openAll() {
-            urls.forEach((url, index) => {
-                setTimeout(() => {
-                    window.open(url, '_blank');
-                }, index * 300);
+        function run() {
+            urls.forEach((url, i) => {
+                setTimeout(() => { window.open(url, '_blank'); }, i * 250);
             });
-
-            setTimeout(() => {
-                document.querySelector('h2').innerText = "Готово! Цю вкладку можна закрити.";
-            }, urls.length * 300 + 1000);
+            // Пытаемся закрыться. Если не даст — страница останется пустой и белой.
+            setTimeout(() => { window.close(); }, urls.length * 250 + 500);
         }
 
-        window.onload = openAll;
+        // Запуск при загрузке
+        window.onload = run;
     </script>
 </body>
 </html>
