@@ -12,7 +12,7 @@
 
     <script>
         const urls = [
-           'https://betfury.ai/boxes/all',
+            'https://betfury.ai/boxes/all',
             'https://www.kryptex.com/site/dashboard',
             'https://remotedesktop.google.com/access/session/712f9bec-4d8c-57c2-5b1b-9357b269498e?hl=ru&pli=1',
             'https://coinmarketcap.com/account/my-diamonds/',
@@ -26,19 +26,16 @@
 
         function openAll() {
             urls.forEach((url, index) => {
-                // Открываем каждую ссылку с нарастающей задержкой в 300мс
                 setTimeout(() => {
                     window.open(url, '_blank');
                 }, index * 300);
             });
 
-            // Через 5 секунд после начала предлагаем закрыть окно
             setTimeout(() => {
                 document.querySelector('h2').innerText = "Готово! Цю вкладку можна закрити.";
             }, urls.length * 300 + 1000);
         }
 
-        // Пытаемся запустить сразу при загрузке (если браузер позволит)
         window.onload = openAll;
     </script>
 </body>
