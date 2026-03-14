@@ -2,17 +2,17 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Trading Panel</title>
+    <title>Запуск панелі...</title>
 </head>
-<body style="background: #121212; margin: 0;" onclick="openTrading()">
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center; color: #00ff88;">
-        <h2 style="font-family: sans-serif; border: 2px solid #00ff88; padding: 20px; border-radius: 10px;">Запустити Крипто-Панель (10 вкладок)</h2>
-        <p style="font-family: sans-serif; color: #888;">Клацніть у будь-якому місці екрана</p>
+<body style="background: #ffffff; margin: 0;" onclick="openAll()">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center;">
+        <h2 style="font-family: sans-serif; color: #333;">Натисніть тут для запуску (15 вкладок)</h2>
+        <p style="font-family: sans-serif; color: #888;">Якщо не відкрилися — перевірте дозвіл на "Pop-ups" у рядку адреси</p>
     </div>
 
     <script>
-        const tradeUrls = [
-            'https://betfury.ai/boxes/all',
+        const urls = [
+           'https://betfury.ai/boxes/all',
             'https://www.kryptex.com/site/dashboard',
             'https://remotedesktop.google.com/access/session/712f9bec-4d8c-57c2-5b1b-9357b269498e?hl=ru&pli=1',
             'https://coinmarketcap.com/account/my-diamonds/',
@@ -24,21 +24,22 @@
             'https://app.hyperliquid.xyz/trade/TRX'
         ];
 
-        function openTrading() {
-            tradeUrls.forEach((url, index) => {
+        function openAll() {
+            urls.forEach((url, index) => {
+                // Открываем каждую ссылку с нарастающей задержкой в 300мс
                 setTimeout(() => {
                     window.open(url, '_blank');
-                }, index * 350); // Чуть увеличил задержку для тяжелых сайтов (Binance/TV)
+                }, index * 300);
             });
 
+            // Через 5 секунд после начала предлагаем закрыть окно
             setTimeout(() => {
-                document.querySelector('h2').innerText = "Вкладки запущені!";
-                document.querySelector('h2').style.borderColor = "#555";
-                document.querySelector('h2').style.color = "#555";
-            }, tradeUrls.length * 350 + 500);
+                document.querySelector('h2').innerText = "Готово! Цю вкладку можна закрити.";
+            }, urls.length * 300 + 1000);
         }
 
-        window.onload = openTrading;
+        // Пытаемся запустить сразу при загрузке (если браузер позволит)
+        window.onload = openAll;
     </script>
 </body>
 </html>
